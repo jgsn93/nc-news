@@ -1,4 +1,4 @@
-import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
