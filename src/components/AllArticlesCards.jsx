@@ -3,12 +3,15 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 const AllArticlesCards = ({ articles }) => {
-  console.log(articles);
-
   return (
-    <Row xs={1} md={2} className="g-4" style={{ margin: "50px 50px 0px 50px" }}>
-      {articles.map((article) => (
-        <Col>
+    <Row
+      xs={1}
+      md={2}
+      className="g-4"
+      style={{ margin: "50px 50px 50px 50px" }}
+    >
+      {articles.map((article, index) => (
+        <Col key={index}>
           <Card>
             <Card.Body>
               <Card.Title>{article.title}</Card.Title>

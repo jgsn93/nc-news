@@ -1,23 +1,30 @@
 import { useState, useEffect, useMemo } from "react";
-import axios from "axios";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
+import { useParams } from "react-router-dom";
 import AllArticlesCards from "./AllArticlesCards";
+import AllArticlesButtons from "./AllArticlesButtons";
+import { fetchArticles } from "../utils/api";
 
 const AllArticles = () => {
   const [articles, setArticles] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedTopic, setSelectedTopic] = useState();
+  const { category } = useParams();
 
   useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get("https://josh-geeson-backend-project.herokuapp.com/api/articles")
-      .then(({ data: { articles } }) => {
+    fetchArticles().then((articles) => {
+      const topicArr = ["coding", "cooking", "football"];
+      if (topicArr.includes(category)) {
+        const articlesCategory = articles.filter((article) => {
+          return article.topic === category;
+        });
+        setArticles(articlesCategory);
+        setIsLoading(false);
+      } else {
         setArticles(articles);
         setIsLoading(false);
-      });
-  }, []);
+      }
+    });
+  }, [articles, category]);
 
   function getFilteredList() {
     if (!selectedTopic) {
@@ -28,38 +35,12 @@ const AllArticles = () => {
 
   const filteredList = useMemo(getFilteredList, [selectedTopic, articles]);
 
-  function handleClick(event) {
-    setSelectedTopic(event.target.value);
-  }
-
   if (isLoading) {
     return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
   } else {
-    const btnStyle = {
-      marginTop: "25px",
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "center",
-      alignContent: "center",
-      flexWrap: "wrap",
-    };
-
     return (
       <>
-        <ButtonGroup style={btnStyle}>
-          <Button onClick={handleClick} variant="success" value="">
-            All
-          </Button>
-          <Button onClick={handleClick} variant="warning" value="cooking">
-            Cooking
-          </Button>
-          <Button onClick={handleClick} variant="info" value="coding">
-            Coding
-          </Button>
-          <Button onClick={handleClick} variant="danger" value="football">
-            Football
-          </Button>
-        </ButtonGroup>
+        <AllArticlesButtons setSelectedTopic={setSelectedTopic} />
         <AllArticlesCards articles={filteredList} />
       </>
     );
