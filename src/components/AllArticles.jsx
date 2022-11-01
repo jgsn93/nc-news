@@ -9,6 +9,8 @@ const AllArticles = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { category } = useParams();
 
+  console.log(category);
+
   useEffect(() => {
     setIsLoading(true);
     if (category === "all" || !category) {
