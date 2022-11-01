@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
-const AllArticlesButtons = ({ setSelectedTopic }) => {
+const AllArticlesButtons = () => {
   const btnGrpStyle = {
     margin: "25px",
     display: "flex",
@@ -12,25 +12,29 @@ const AllArticlesButtons = ({ setSelectedTopic }) => {
     flexWrap: "wrap",
   };
 
-  function handleClick(event) {
-    setSelectedTopic(event.target.value);
-  }
-
   return (
     <>
       <ButtonGroup style={btnGrpStyle}>
-        <Button onClick={handleClick} variant="success" value="">
-          <Link to="/articles/all">All</Link>
-        </Button>
-        <Button onClick={handleClick} variant="warning" value="cooking">
-          <Link to="/articles/cooking">Cooking</Link>
-        </Button>
-        <Button onClick={handleClick} variant="info" value="coding">
-          <Link to="/articles/coding">Coding</Link>
-        </Button>
-        <Button onClick={handleClick} variant="danger" value="football">
-          <Link to="/articles/football"> Football</Link>
-        </Button>
+        <LinkContainer to="/articles/all">
+          <Button variant="success" value="">
+            All
+          </Button>
+        </LinkContainer>
+        <LinkContainer to="/articles/cooking">
+          <Button variant="warning" value="cooking">
+            Cooking
+          </Button>
+        </LinkContainer>
+        <LinkContainer to="/articles/coding">
+          <Button variant="info" value="coding">
+            Coding
+          </Button>
+        </LinkContainer>
+        <LinkContainer to="/articles/football">
+          <Button variant="danger" value="football">
+            Football
+          </Button>
+        </LinkContainer>
       </ButtonGroup>
     </>
   );
