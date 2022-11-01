@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
