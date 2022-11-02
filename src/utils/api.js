@@ -21,3 +21,15 @@ export const fetchArticlesById = (article_id) => {
     return res.data.article;
   });
 };
+
+export const updateArticleById = (article_id, vote) => {
+  return newsApi
+    .patch(`/articles/${article_id}`, { inc_votes: vote })
+    .then((res) => {
+      console.log(res.data);
+      return res.data;
+    })
+    .catch((err) => {
+      console.alert(err.message);
+    });
+};
