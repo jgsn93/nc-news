@@ -1,4 +1,10 @@
+import SingleArticleComments from "./SingleArticleComments";
 import SingleArticleVotes from "./SingleArticleVotes";
+import Avvvatars from "avvvatars-react";
+
+const SingleArticlePage = ({ data }) => {
+  console.log(data);
+
 
 const SingleArticlePage = ({ data }) => {
   let readableDate = data["created_at"].slice(0, 10);
@@ -11,9 +17,13 @@ const SingleArticlePage = ({ data }) => {
         {data.title}
       </h1>
       <h4>Published: {readableDate}</h4>
-      <h5 style={{ marginBottom: "50px" }}>By {data.author}</h5>
+      <Avvvatars value={data.author} />
+      <h5 style={{ marginTop: "10px", marginBottom: "50px" }}>
+        By {data.author}
+      </h5>
       <p>{data.body}</p>
       <SingleArticleVotes article_id={data.article_id} votes={data.votes} />
+      <SingleArticleComments article_id={data.article_id} />
     </div>
   );
 };
