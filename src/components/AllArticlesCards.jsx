@@ -4,8 +4,6 @@ import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 
 const AllArticlesCards = ({ articles }) => {
-  console.log(articles);
-
   return (
     <Row
       xs={1}
