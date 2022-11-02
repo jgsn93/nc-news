@@ -1,3 +1,6 @@
+import SingleArticleComments from "./SingleArticleComments";
+import Avvvatars from "avvvatars-react";
+
 const SingleArticlePage = ({ data }) => {
   console.log(data);
 
@@ -9,8 +12,12 @@ const SingleArticlePage = ({ data }) => {
         {data.title}
       </h1>
       <h4>Published: {readableDate}</h4>
-      <h5 style={{ marginBottom: "50px" }}>By {data.author}</h5>
+      <Avvvatars value={data.author} />
+      <h5 style={{ marginTop: "10px", marginBottom: "50px" }}>
+        By {data.author}
+      </h5>
       <p>{data.body}</p>
+      <SingleArticleComments article_id={data.article_id} />
     </div>
   );
 };
