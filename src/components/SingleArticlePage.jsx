@@ -3,13 +3,7 @@ import SingleArticleVotes from "./SingleArticleVotes";
 import Avvvatars from "avvvatars-react";
 
 const SingleArticlePage = ({ data }) => {
-  console.log(data);
-
-
-const SingleArticlePage = ({ data }) => {
   let readableDate = data["created_at"].slice(0, 10);
-
-  console.log(data);
 
   return (
     <div style={{ margin: "50px 50px 50px 50px" }}>
