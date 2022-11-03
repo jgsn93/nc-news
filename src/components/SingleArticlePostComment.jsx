@@ -14,6 +14,7 @@ const SingleArticlePostComment = ({ article_id, setNewComment }) => {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      alert("Missing credentials");
     } else {
       event.preventDefault();
       setValidated(true);
