@@ -56,3 +56,17 @@ export const updateArticleById = (article_id, vote) => {
       console.alert(err.message);
     });
 };
+
+export const sendCommentByArticleId = (article_id, username, comment) => {
+  return newsApi
+    .post(`/articles/${article_id}/comments`, {
+      username: username,
+      body: comment,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      alert(err.response.data.message);
+    });
+};

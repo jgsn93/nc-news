@@ -5,8 +5,6 @@ import Avvvatars from "avvvatars-react";
 const SingleArticlePage = ({ data }) => {
   let readableDate = data["created_at"].slice(0, 10);
 
-  console.log(data);
-
   return (
     <div style={{ margin: "50px 50px 50px 50px" }}>
       <h1 style={{ textAlign: "center", marginBottom: "50px" }}>
