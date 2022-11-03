@@ -16,6 +16,23 @@ export const fetchArticlesByTopic = (topic) => {
   });
 };
 
+export const fetchArticlesByTopicAndSorted = (sort, order, topic) => {
+  if (!topic) {
+    return newsApi
+      .get(`articles?sort_by=${sort}&order=${order}`)
+      .then((res) => {
+        return res.data.articles;
+      });
+  } else {
+    console.log("test");
+    return newsApi
+      .get(`articles?sort_by=${sort}&order=${order}&topic=${topic}`)
+      .then((res) => {
+        return res.data.articles;
+      });
+  }
+};
+
 export const fetchArticlesById = (article_id) => {
   return newsApi.get(`/articles/${article_id}`).then((res) => {
     return res.data.article;
