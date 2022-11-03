@@ -2,7 +2,6 @@ import Card from "react-bootstrap/Card";
 import Avvvatars from "avvvatars-react";
 
 const SingleArticleCommCard = ({ comments }) => {
-  console.log(comments);
   return (
     <div style={{ marginTop: "100px" }}>
       {comments.map((comment, index) => (
