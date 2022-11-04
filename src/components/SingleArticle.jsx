@@ -4,7 +4,7 @@ import { fetchArticlesById } from "../utils/api";
 import AllArticlesButtons from "./AllArticlesButtons";
 import SingleArticlePage from "./SingleArticlePage";
 
-const SingleArticle = () => {
+const SingleArticle = ({ user }) => {
   const [singleArticle, setSingleArticle] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
@@ -28,7 +28,7 @@ const SingleArticle = () => {
     return (
       <>
         <AllArticlesButtons />
-        <SingleArticlePage data={singleArticle} />
+        <SingleArticlePage data={singleArticle} user={user} />
       </>
     );
   }

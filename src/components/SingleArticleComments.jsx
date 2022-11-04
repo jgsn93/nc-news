@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import SingleArticleCommCard from "./SingleArticleCommCard";
 import SingleArticlePostComment from "./SingleArticlePostComment";
 
-const SingleArticleComments = ({ article_id }) => {
+const SingleArticleComments = ({ article_id, user }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [newComment, setNewComment] = useState();
+  const [deleteComment, setDeleteComment] = useState();
 
   useEffect(() => {
     setIsLoading(true);
@@ -16,7 +17,7 @@ const SingleArticleComments = ({ article_id }) => {
         setIsLoading(false);
       })
       .catch((err) => {});
-  }, [article_id, newComment]);
+  }, [article_id, newComment, deleteComment]);
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -28,7 +29,11 @@ const SingleArticleComments = ({ article_id }) => {
           newComment={newComment}
           setNewComment={setNewComment}
         />
-        <SingleArticleCommCard comments={comments} />
+        <SingleArticleCommCard
+          comments={comments}
+          user={user}
+          setDeleteComment={setDeleteComment}
+        />
       </>
     );
   }
