@@ -16,36 +16,21 @@ export const fetchArticles = (sort, order, topic) => {
       delete params[key];
     }
   }
-  return newsApi
-    .get(`/articles`, { params })
-    .then((res) => {
-      return res.data.articles;
-    })
-    .catch((err) => {
-      alert(err.response.data.message);
-    });
+  return newsApi.get(`/articles`, { params }).then((res) => {
+    return res.data.articles;
+  });
 };
 
 export const fetchArticlesById = (article_id) => {
-  return newsApi
-    .get(`/articles/${article_id}`)
-    .then((res) => {
-      return res.data.article;
-    })
-    .catch((err) => {
-      alert(err.response.data.message);
-    });
+  return newsApi.get(`/articles/${article_id}`).then((res) => {
+    return res.data.article;
+  });
 };
 
 export const fetchCommentsByArticleId = (article_id) => {
-  return newsApi
-    .get(`/articles/${article_id}/comments`)
-    .then((res) => {
-      return res.data.comments;
-    })
-    .catch((err) => {
-      alert(err.response.data.message);
-    });
+  return newsApi.get(`/articles/${article_id}/comments`).then((res) => {
+    return res.data.comments;
+  });
 };
 
 export const updateArticleById = (article_id, vote) => {
@@ -56,7 +41,7 @@ export const updateArticleById = (article_id, vote) => {
       return res.data;
     })
     .catch((err) => {
-      alert(err.response.data.message);
+      console.alert(err.message);
     });
 };
 
@@ -68,6 +53,7 @@ export const sendCommentByArticleId = (article_id, username, comment) => {
     })
     .then((res) => {
       console.log(res);
+      alert("Comment posted successfully");
     })
     .catch((err) => {
       alert(err.response.data.message);
