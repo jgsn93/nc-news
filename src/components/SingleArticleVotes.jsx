@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { updateArticleById } from "../utils/api";
+import { Button } from "react-bootstrap";
 
 const SingleArticleVotes = ({ article_id, votes }) => {
   const [likes, setLikes] = useState(votes);
@@ -20,9 +21,9 @@ const SingleArticleVotes = ({ article_id, votes }) => {
   };
 
   return (
-    <button onClick={handleClick}>
+    <Button onClick={handleClick}>
       <span className="likes-counter">{`Like | ${likes}`}</span>
-    </button>
+    </Button>
   );
 };
 
