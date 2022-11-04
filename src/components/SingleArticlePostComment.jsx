@@ -2,7 +2,6 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { sendCommentByArticleId } from "../utils/api";
-import Alert from "react-bootstrap/Alert";
 
 const SingleArticlePostComment = ({ article_id, setNewComment }) => {
   const [username, setUsername] = useState("tickle122");
