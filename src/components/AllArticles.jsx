@@ -1,45 +1,55 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import AllArticlesCards from "./AllArticlesCards";
 import AllArticlesButtons from "./AllArticlesButtons";
+import AllArticlesSortBy from "./AllArticlesSortBy";
 import {
   fetchArticles,
   fetchArticlesByTopic,
-  fetchArticlesByTopicAndSorted,
+  fetchArticlesWithParams,
 } from "../utils/api";
-import AllArticlesSortBy from "./AllArticlesSortBy";
 
 const AllArticles = () => {
   const [articles, setArticles] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [sortBy, setSortBy] = useState();
-  const [orderBy, setOrderBy] = useState("asc");
   const { category } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queries = [...searchParams];
 
   useEffect(() => {
     setIsLoading(true);
-    if ((!sortBy && category === "all") || !category) {
-      console.log("condition 1");
-      fetchArticles().then((articles) => {
-        setArticles(articles);
-        setIsLoading(false);
-      });
-    } else if ((sortBy && category === "all") || !category) {
-      console.log("condition 2");
-      fetchArticlesByTopicAndSorted(category, sortBy, orderBy).then(
-        (articles) => {
+    if (category === "all" || !category) {
+      if (Object.keys(queries).length <= 1) {
+        fetchArticles().then((articles) => {
           setArticles(articles);
           setIsLoading(false);
-        }
-      );
+        });
+      } else {
+        const param1 = queries[0][1];
+        const param2 = queries[1][1];
+
+        fetchArticlesWithParams(param1, param2).then((articles) => {
+          setArticles(articles);
+          setIsLoading(false);
+        });
+      }
     } else {
-      console.log("condition 3");
-      fetchArticlesByTopic(category).then((articles) => {
-        setArticles(articles);
-        setIsLoading(false);
-      });
+      if (category && Object.keys(queries).length === 0) {
+        fetchArticlesByTopic(category).then((articles) => {
+          setArticles(articles);
+          setIsLoading(false);
+        });
+      } else {
+        const param1 = queries[0][1];
+        const param2 = queries[1][1];
+
+        fetchArticlesWithParams(param1, param2, category).then((articles) => {
+          setArticles(articles);
+          setIsLoading(false);
+        });
+      }
     }
-  }, [category, sortBy, orderBy]);
+  }, [category, searchParams]);
 
   if (isLoading) {
     return (
@@ -51,10 +61,11 @@ const AllArticles = () => {
   } else {
     return (
       <>
-        <button onClick={() => setSortBy("created_at")}>Sort By</button>
-        <button onClick={() => setOrderBy("desc")}>Order By</button>
         <AllArticlesButtons />
-        <AllArticlesSortBy />
+        <AllArticlesSortBy
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+        />
         <AllArticlesCards articles={articles} />
       </>
     );

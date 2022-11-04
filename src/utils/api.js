@@ -11,23 +11,27 @@ export const fetchArticles = () => {
 };
 
 export const fetchArticlesByTopic = (topic) => {
-  return newsApi.get(`/articles?topic=${topic}`).then((res) => {
+  return newsApi.get(`/articles`, { params: { topic: topic } }).then((res) => {
     return res.data.articles;
   });
 };
 
-export const fetchArticlesByTopicAndSorted = (sort, order, topic) => {
-  if (!topic) {
+export const fetchArticlesWithParams = (sort, order, topic) => {
+  if (!topic || topic === "all") {
     return newsApi
-      .get(`articles?sort_by=${sort}&order=${order}`)
+      .get(`articles`, {
+        params: { sort_by: sort, order: order },
+      })
       .then((res) => {
         return res.data.articles;
       });
   } else {
-    console.log("test");
     return newsApi
-      .get(`articles?sort_by=${sort}&order=${order}&topic=${topic}`)
+      .get(`articles`, {
+        params: { sort_by: sort, order: order, topic: topic },
+      })
       .then((res) => {
+        console.log(res.data.articles);
         return res.data.articles;
       });
   }
