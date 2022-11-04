@@ -53,3 +53,9 @@ export const sendCommentByArticleId = (article_id, username, comment) => {
       alert(err.response.data.message);
     });
 };
+
+export const deleteCommentByCommentId = (comment_id) => {
+  return newsApi.delete(`/comments/${comment_id}`).then((res) => {
+    console.log(res);
+  });
+};

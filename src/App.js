@@ -5,10 +5,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SingleArticle from "./components/SingleArticle";
 
 function App() {
+  const user = "tickle122";
+
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
+        <Header user={user} />
         <Routes>
           {/* / route */}
           <Route path="/" element={<AllArticles />} />
@@ -19,7 +21,7 @@ function App() {
           {/* /articles/:article_id routes */}
           <Route
             path="/articles/:category/:article_id"
-            element={<SingleArticle />}
+            element={<SingleArticle user={user} />}
           />
         </Routes>
       </div>
