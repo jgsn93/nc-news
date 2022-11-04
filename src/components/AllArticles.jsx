@@ -1,30 +1,36 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import AllArticlesCards from "./AllArticlesCards";
 import AllArticlesButtons from "./AllArticlesButtons";
-import { fetchArticles, fetchArticlesByTopic } from "../utils/api";
+import AllArticlesSortBy from "./AllArticlesSortBy";
+import { fetchArticles } from "../utils/api";
 
 const AllArticles = () => {
   const [articles, setArticles] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { category } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queries = [...searchParams];
 
   useEffect(() => {
     setIsLoading(true);
-    if (category === "all" || !category) {
-      fetchArticles().then((articles) => {
+    if (Object.keys(queries).length >= 2) {
+      const query1 = queries[0][1];
+      const query2 = queries[1][1];
+
+      fetchArticles(query1, query2, category).then((articles) => {
         setArticles(articles);
         setIsLoading(false);
       });
     } else {
-      fetchArticlesByTopic(category)
-        .then((articles) => {
+      fetchArticles("", "", category ? category : queries[0][1]).then(
+        (articles) => {
           setArticles(articles);
           setIsLoading(false);
-        })
-        .catch((err) => {});
+        }
+      );
     }
-  }, [category]);
+  }, [category, searchParams]);
 
   if (isLoading) {
     return (
@@ -37,6 +43,10 @@ const AllArticles = () => {
     return (
       <>
         <AllArticlesButtons />
+        <AllArticlesSortBy
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+        />
         <AllArticlesCards articles={articles} />
       </>
     );

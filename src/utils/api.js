@@ -4,14 +4,19 @@ const newsApi = axios.create({
   baseURL: "https://josh-geeson-backend-project.herokuapp.com/api",
 });
 
-export const fetchArticles = () => {
-  return newsApi.get(`/articles`).then((res) => {
-    return res.data.articles;
-  });
-};
+export const fetchArticles = (sort, order, topic) => {
+  const params = {
+    topic: topic,
+    sort_by: sort,
+    order: order,
+  };
 
-export const fetchArticlesByTopic = (topic) => {
-  return newsApi.get(`/articles?topic=${topic}`).then((res) => {
+  for (const key of Object.keys(params)) {
+    if (params[key] === "" || params[key] === "all") {
+      delete params[key];
+    }
+  }
+  return newsApi.get(`/articles`, { params }).then((res) => {
     return res.data.articles;
   });
 };
