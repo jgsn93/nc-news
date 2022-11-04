@@ -23,12 +23,10 @@ const AllArticles = () => {
         setIsLoading(false);
       });
     } else {
-      fetchArticles("", "", category ? category : queries[0][1]).then(
-        (articles) => {
-          setArticles(articles);
-          setIsLoading(false);
-        }
-      );
+      fetchArticles("", "", category ? category : "").then((articles) => {
+        setArticles(articles);
+        setIsLoading(false);
+      });
     }
   }, [category, searchParams]);
 
@@ -36,7 +34,7 @@ const AllArticles = () => {
     return (
       <>
         <AllArticlesButtons />
-        <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+        <h2 style={{ textAlign: "center" }}>Loading...</h2>
       </>
     );
   } else {
