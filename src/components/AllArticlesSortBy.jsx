@@ -34,7 +34,7 @@ const AllArticlesSortBy = ({ setSearchParams }) => {
     <div style={style}>
       <label style={{ marginRight: "10px" }}>Sort by:</label>
       <select
-        style={{ marginRight: "10px", width: "10%" }}
+        style={{ marginRight: "10px", width: "25%" }}
         onChange={handleChange}
         value={menuParams.sort_by}
         id="sort_by"
@@ -46,7 +46,7 @@ const AllArticlesSortBy = ({ setSearchParams }) => {
         <option value="votes">Votes</option>
       </select>
       <select
-        style={{ marginRight: "10px", width: "10%" }}
+        style={{ marginRight: "10px", width: "25%" }}
         onChange={handleChange}
         value={menuParams.order}
         id="order"

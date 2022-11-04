@@ -16,21 +16,36 @@ export const fetchArticles = (sort, order, topic) => {
       delete params[key];
     }
   }
-  return newsApi.get(`/articles`, { params }).then((res) => {
-    return res.data.articles;
-  });
+  return newsApi
+    .get(`/articles`, { params })
+    .then((res) => {
+      return res.data.articles;
+    })
+    .catch((err) => {
+      alert(err.response.data.message);
+    });
 };
 
 export const fetchArticlesById = (article_id) => {
-  return newsApi.get(`/articles/${article_id}`).then((res) => {
-    return res.data.article;
-  });
+  return newsApi
+    .get(`/articles/${article_id}`)
+    .then((res) => {
+      return res.data.article;
+    })
+    .catch((err) => {
+      alert(err.response.data.message);
+    });
 };
 
 export const fetchCommentsByArticleId = (article_id) => {
-  return newsApi.get(`/articles/${article_id}/comments`).then((res) => {
-    return res.data.comments;
-  });
+  return newsApi
+    .get(`/articles/${article_id}/comments`)
+    .then((res) => {
+      return res.data.comments;
+    })
+    .catch((err) => {
+      alert(err.response.data.message);
+    });
 };
 
 export const updateArticleById = (article_id, vote) => {
@@ -41,7 +56,7 @@ export const updateArticleById = (article_id, vote) => {
       return res.data;
     })
     .catch((err) => {
-      console.alert(err.message);
+      alert(err.response.data.message);
     });
 };
 

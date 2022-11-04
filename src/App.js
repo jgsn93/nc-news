@@ -3,6 +3,8 @@ import AllArticles from "./components/AllArticles";
 import Header from "./components/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SingleArticle from "./components/SingleArticle";
+import ErrorRoute from "./components/ErrorRoute";
+import AllArticlesButtons from "./components/AllArticlesButtons";
 
 function App() {
   const user = "tickle122";
@@ -23,6 +25,16 @@ function App() {
             path="/articles/:category/:article_id"
             element={<SingleArticle user={user} />}
           />
+          {/* Error route */}
+          <Route
+            path="*"
+            element={
+              <>
+                <AllArticlesButtons />
+                <ErrorRoute />
+              </>
+            }
+          ></Route>
         </Routes>
       </div>
     </BrowserRouter>

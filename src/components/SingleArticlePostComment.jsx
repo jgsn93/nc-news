@@ -2,9 +2,10 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { sendCommentByArticleId } from "../utils/api";
+import Alert from "react-bootstrap/Alert";
 
 const SingleArticlePostComment = ({ article_id, setNewComment }) => {
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState("tickle122");
   const [comment, setComment] = useState();
   const [validated, setValidated] = useState(false);
 
@@ -45,6 +46,7 @@ const SingleArticlePostComment = ({ article_id, setNewComment }) => {
           required
           type="text"
           placeholder="Enter username"
+          value={username}
           onChange={handleUsernameChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
