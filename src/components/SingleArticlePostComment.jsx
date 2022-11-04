@@ -19,6 +19,7 @@ const SingleArticlePostComment = ({ article_id, setNewComment }) => {
       event.preventDefault();
       setValidated(true);
       sendCommentByArticleId(article_id, username, comment).then(() => {
+        alert("Comment posted successfully");
         setNewComment({ username, comment });
       });
     }

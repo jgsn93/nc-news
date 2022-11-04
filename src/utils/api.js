@@ -53,7 +53,6 @@ export const sendCommentByArticleId = (article_id, username, comment) => {
     })
     .then((res) => {
       console.log(res);
-      alert("Comment posted successfully");
     })
     .catch((err) => {
       alert(err.response.data.message);
